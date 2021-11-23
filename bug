@@ -1,0 +1,82 @@
+echo "enter website domain"
+echo -e " enter domaim"
+read a
+host $a
+wget -O /tmp/temp_aspnet_config_err --tries=1 $a/%7C~.aspx
+wget -O /tmp/temp_wp_check --tries=1 $a/wp-admin
+wget -O /tmp/temp_drp_check --tries=1 $a/user
+wget -O /tmp/temp_joom_check --tries=1 $a/administrator
+uniscan -e -u $a
+wafw00f $a
+nmap -F --open -Pn $a
+theHarvester -l 50 -b google -d $a
+dnsrecon -d $a
+nmap -p80 --script http-security-headers -Pn $a
+nmap -p80,443 --script http-slowloris --max-parallelism 500 -Pn $a
+sslyze --heartbleed $a
+nmap -p443 --script ssl-heartbleed -Pn $a
+nmap -p443 --script ssl-poodle -pn $a
+nmap -p443 --script ssl-ccs-injection -Pn $a
+nmap -p443 --script ssl-enum-ciphers  -pn  $a
+nmap -p443 --script ssl-dh-params -Pn $a
+sslyze --certinfo=basic $a
+sslyze --compression $a
+sslyze --reneg $a
+sslyze --resum $a
+lbd $a
+golismero -e dns_malware scan $a
+golismero -e heartbleed scan $a
+golismero -e brute_url_predictables scan $a 
+golismero -e brute_directories scan $a 
+golismero -e sqlmap scan $a 
+dirb http://$a -fi 
+xsser --all=http://$a 
+golismero -e sslscan scan $a 
+golismero -e zone_transfer scan $a 
+golismero -e nikto scan $a 
+golismero -e brute_dns scan $a 
+dnsenum $a 
+fierce --domain $a 
+dmitry -e $a 
+dmitry -s $a 
+nmap -p   --open -Pn $a 
+nmap -p   --open -Pn $a 
+nmap --script stuxnet-detect -p    -Pn $a 
+davtest -url http://$a 
+golismero -e fingerprint_web scan $a 
+uniscan -w -u $a 
+uniscan -q -u $a 
+uniscan -r -u $a 
+uniscan -s -u $a 
+uniscan -d -u $a 
+nikto -Plugins 'apache_expect_xss' -host $a 
+nikto -Plugins 'subdomain' -host $a 
+nikto -Plugins 'shellshock' -host $a 
+nikto -Plugins 'cookies' -host $a 
+nikto -Plugins 'put_del_test' -host $a 
+nikto -Plugins 'headers' -host $a 
+nikto -Plugins 'ms  -   ' -host $a 
+nikto -Plugins 'msgs' -host $a 
+nikto -Plugins 'outdated' -host $a 
+nikto -Plugins 'httpoptions' -host $a 
+nikto -Plugins 'cgi' -host $a 
+nikto -Plugins 'ssl' -host $a 
+nikto -Plugins 'sitefiles' -host $a 
+nikto -Plugins 'paths' -host $a 
+dnsmap $a 
+nmap -p     --open -Pn $a 
+nmap -p     --open -Pn $a 
+nmap -p     --open -Pn $a
+nmap -p     --open -sU -Pn $a 
+nmap -p     --open -sT -Pn $a
+nmap -p -      --open -Pn $a 
+nmap -p -      -sU --open -Pn $a 
+wget -O /tmp/temp_aspnet_elmah_axd --tries=  $a/elmah.axd 
+nmap -p   ,   -    --open -Pn $a 
+nmap -p   ,    --open -Pn $a 
+wapiti $a -f txt -o temp_wapiti 
+nmap -p   --script=http-iis-webdav-vuln -Pn $a 
+whatweb $a -a 
+amass enum -d $a
+          
+
