@@ -1,3 +1,7 @@
+sudo apt install -y nmap uniscan lbd nikto dnsmap amass whatweb wapiti golismero dmitry  davtest dirb xsser fierce dnsenum  wafw00f theHarvester dnsrecon sslyze  
+git clone https://github.com/golismero/golismero.git
+cd golismero
+pip install -r requirements.txt
 echo "enter website domain"
 echo -e " enter domaim"
 read a
@@ -11,6 +15,7 @@ wafw00f $a
 nmap -F --open -Pn $a
 theHarvester -l 50 -b google -d $a
 dnsrecon -d $a
+nmap -Pn -T4 --script=vuln* $a -A 
 nmap -p80 --script http-security-headers -Pn $a
 nmap -p80,443 --script http-slowloris --max-parallelism 500 -Pn $a
 sslyze --heartbleed $a
@@ -24,17 +29,17 @@ sslyze --compression $a
 sslyze --reneg $a
 sslyze --resum $a
 lbd $a
-golismero -e dns_malware scan $a
-golismero -e heartbleed scan $a
-golismero -e brute_url_predictables scan $a 
-golismero -e brute_directories scan $a 
-golismero -e sqlmap scan $a 
+python2 golismero.py -e dns_malware scan $a
+python2 golismero.py -e heartbleed scan $a
+python2 golismero.py -e brute_url_predictables scan $a 
+python2 golismero.py -e brute_directories scan $a 
+python2 golismero.py -e sqlmap scan $a 
 dirb http://$a -fi 
 xsser --all=http://$a 
-golismero -e sslscan scan $a 
-golismero -e zone_transfer scan $a 
-golismero -e nikto scan $a 
-golismero -e brute_dns scan $a 
+python2 golismero.py -e sslscan scan $a 
+python2 golismero.py -e zone_transfer scan $a 
+python2 golismero.py -e nikto scan $a 
+python2 golismero.py -e brute_dns scan $a 
 dnsenum $a 
 fierce --domain $a 
 dmitry -e $a 
@@ -43,7 +48,7 @@ nmap -p   --open -Pn $a
 nmap -p   --open -Pn $a 
 nmap --script stuxnet-detect -p    -Pn $a 
 davtest -url http://$a 
-golismero -e fingerprint_web scan $a 
+python2 golismero.py -e fingerprint_web scan $a 
 uniscan -w -u $a 
 uniscan -q -u $a 
 uniscan -r -u $a 
@@ -78,5 +83,6 @@ wapiti $a -f txt -o temp_wapiti
 nmap -p   --script=http-iis-webdav-vuln -Pn $a 
 whatweb $a -a 
 amass enum -d $a
+
           
 
