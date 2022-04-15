@@ -1,5 +1,5 @@
-chmod +x bug
-sudo mv bug /bin
+
+sudo mv bug /usr/bin
 cd ..
 cd ..
 cd usr
