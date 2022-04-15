@@ -1,6 +1,10 @@
 chmod +x bug
 sudo mv bug /bin
-sudo chmod +x usr/bin bug
+cd ..
+cd ..
+cd usr/bin
+sudo chmod +x bug
+cd
 sudo apt install -y nmap uniscan lbd nikto dnsmap amass whatweb wapiti  dmitry  davtest dirb xsser fierce dnsenum  wafw00f theharvester dnsrecon sslyze  
 sudo git clone https://github.com/golismero/golismero.git
 cd golismero
