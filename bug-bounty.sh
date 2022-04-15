@@ -1,5 +1,6 @@
 
 sudo mv bug /usr/bin
+cd
 cd ..
 cd ..
 cd usr
